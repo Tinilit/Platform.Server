@@ -36,13 +36,13 @@ namespace Platform.DataAccess
 
                 user = new User()
                 {
-                    UserName = "tinilit",
-                    FirstName = "Max",
-                    LastName = "Palamarchuk",
-                    Email = "max44863@gmail.com"
+                    UserName = "Admin",
+                    FirstName = "Admin",
+                    Surname = "Adminovich",
+                    Email = "Admin@gmail.com"
                 };
 
-                var userResult = await _userMgr.CreateAsync(user, "P@ssword!1");
+                var userResult = await _userMgr.CreateAsync(user, "Admin");
                 var roleResult = await _userMgr.AddToRoleAsync(user, "Admin");
                 var claimResult = await _userMgr.AddClaimAsync(user, new Claim("SuperUser", "True"));
 

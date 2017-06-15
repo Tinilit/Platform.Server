@@ -7,18 +7,19 @@ using Platform.DataAccess.Entities;
 
 namespace Plarform.Server.Mappings
 {
-    public class SpeakerUrlResolver : IValueResolver<Speaker, SpeakerModel, string>
+    public class BrandUrlResolver : IValueResolver<Brand, BrandModel, string>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public SpeakerUrlResolver(IHttpContextAccessor httpContextAccessor)
+
+        public BrandUrlResolver(IHttpContextAccessor httpContextAccessor)
         {
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public string Resolve(Speaker source, SpeakerModel destination, string destMember, ResolutionContext context)
+        public string Resolve(Brand source, BrandModel destination, string destMember, ResolutionContext context)
         {
             var url = (IUrlHelper)_httpContextAccessor.HttpContext.Items[BaseController.URLHELPER];
-            return url.Link("SpeakerGet", new { moniker = source.Camp.Moniker, id = source.Id });
+            return url.Link("brandGet", new { brandName = source.Name });
         }
     }
 }

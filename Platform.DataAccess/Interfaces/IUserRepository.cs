@@ -2,7 +2,7 @@
 
 namespace Platform.DataAccess.Interfaces
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository
     {
         // PlatformUser
         User GetUser(string userName);

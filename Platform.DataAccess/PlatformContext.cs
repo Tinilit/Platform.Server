@@ -15,29 +15,67 @@ namespace Platform.DataAccess
             _config = config;
         }
 
-        public DbSet<Camp> Camps { get; set; }
-        public DbSet<Speaker> Speakers { get; set; }
-        public DbSet<Talk> Talks { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<BuyOffer> BuyOffers { get; set; }
+        public DbSet<SellOffer> SellOffers { get; set; }
+        public DbSet<MessageLog> MessageLogs { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<TransactionEvent> TransactionEvents { get; set; }
+        public DbSet<UserCommunication> UserCommunications { get; set; }
+        public DbSet<WantList> WantLists { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Camp>()
-              .Property(c => c.Moniker)
-              .IsRequired();
-            builder.Entity<Camp>()
-              .Property(c => c.RowVersion)
-              .ValueGeneratedOnAddOrUpdate()
-              .IsConcurrencyToken();
-            builder.Entity<Speaker>()
-              .Property(c => c.RowVersion)
-              .ValueGeneratedOnAddOrUpdate()
-              .IsConcurrencyToken();
-            builder.Entity<Talk>()
-              .Property(c => c.RowVersion)
-              .ValueGeneratedOnAddOrUpdate()
-              .IsConcurrencyToken();
+            builder.Entity<Brand>()
+                .Property(x => x.Name)
+                .IsRequired();
+            builder.Entity<Brand>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
+
+            builder.Entity<Product>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
+
+            builder.Entity<BuyOffer>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
+
+            builder.Entity<SellOffer>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
+
+            builder.Entity<MessageLog>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
+
+            builder.Entity<Transaction>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
+
+            builder.Entity<TransactionEvent>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
+
+            builder.Entity<UserCommunication>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
+
+            builder.Entity<WantList>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

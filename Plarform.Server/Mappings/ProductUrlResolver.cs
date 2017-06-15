@@ -7,19 +7,19 @@ using Platform.DataAccess.Entities;
 
 namespace Plarform.Server.Mappings
 {
-    public class CampUrlResolver:IValueResolver<Camp,CampModel,string>
+    public class ProductUrlResolver : IValueResolver<Product, ProductModel, string>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CampUrlResolver(IHttpContextAccessor httpContextAccessor)
+        public ProductUrlResolver(IHttpContextAccessor httpContextAccessor)
         {
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public string Resolve(Camp source, CampModel destination, string destMember, ResolutionContext context)
+        public string Resolve(Product source, ProductModel destination, string destMember, ResolutionContext context)
         {
             var url = (IUrlHelper)_httpContextAccessor.HttpContext.Items[BaseController.URLHELPER];
-            return url.Link("CampGet",new { moniker = source.Moniker });
+            return url.Link("brandGet", new { brandName = source.Brand.Name, id = source.Id });
         }
     }
 }

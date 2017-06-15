@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Platform.DataAccess.Entities;
 using Platform.DataAccess.Interfaces;
@@ -32,11 +31,6 @@ namespace Platform.DataAccess.Repositories
               .Where(u => u.UserName == userName)
               .Cast<User>()
               .FirstOrDefault();
-        }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return (await _context.SaveChangesAsync()) > 0;
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -20,19 +19,16 @@ namespace Plarform.Server.Controllers
     public class AuthController : Controller
     {
         private readonly UserManager<User> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IPasswordHasher<User> _hasher;
         private readonly ILogger<AuthController> _logger;
         private readonly IConfigurationRoot _config;
 
         public AuthController(UserManager<User> userManager,
-            RoleManager<IdentityRole> roleManager,
             IPasswordHasher<User> hasher,
             ILogger<AuthController> logger,
             IConfigurationRoot config)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
             _hasher = hasher;
             _logger = logger;
             _config = config;
@@ -55,7 +51,7 @@ namespace Plarform.Server.Controllers
                             new Claim(JwtRegisteredClaimNames.Sub,user.UserName),
                             new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
                             new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName??"undefined"),
-                            new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName??"undefined"),
+                            new Claim(JwtRegisteredClaimNames.FamilyName, user.Surname??"undefined"),
                             new Claim(JwtRegisteredClaimNames.Email, user.Email??"undefined")
                         }.Union(userClaims);
 

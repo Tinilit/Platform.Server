@@ -6,104 +6,74 @@ using Platform.DataAccess.Entities;
 
 namespace Platform.DataAccess
 {
-  public class PlatformDbInitializer
+    public class PlatformDbInitializer
     {
-    private PlatformContext _ctx;
+        private PlatformContext _ctx;
 
-    public PlatformDbInitializer(PlatformContext ctx)
-    {
-      _ctx = ctx;
-    }
-
-    public async Task Seed()
-    {
-      if (!_ctx.Camps.Any())
-      {
-        // Add Data
-        _ctx.AddRange(_sample);
-        await _ctx.SaveChangesAsync();
-      }
-    }
-
-    List<Camp> _sample = new List<Camp>
-    {
-      new Camp()
-      {
-        Name = "Your First Code Camp",
-        Moniker = "ATL2016",
-        EventDate = DateTime.Today.AddDays(45),
-        Length = 1,
-        Description = "This is the first code camp",
-        Location = new Location()
+        public PlatformDbInitializer(PlatformContext ctx)
         {
-          Address1 = "123 Main Street",
-          CityTown = "Atlanta",
-          StateProvince = "GA",
-          PostalCode = "30303",
-          Country = "USA"
-        },
-        Speakers = new List<Speaker>
-        {
-          new Speaker()
-          {
-            Name = "Shawn Wildermuth",
-            Bio = "I'm a speaker",
-            CompanyName = "Wilder Minds LLC",
-            GitHubName = "shawnwildermuth",
-            TwitterName = "shawnwildermuth",
-            PhoneNumber = "555-1212",
-            HeadShotUrl = "http://wilderminds.com/images/minds/shawnwildermuth.jpg",
-            WebsiteUrl = "http://wildermuth.com",
-            Talks = new List<Talk>()
-            {
-              new Talk()
-              {
-                Title =  "How to do ASP.NET Core",
-                Abstract = "How to do ASP.NET Core",
-                Category = "Web Development",
-                Level = "100",
-                Prerequisites = "C# Experience",
-                Room = "245",
-                StartingTime = DateTime.Parse("14:30")
-              },
-              new Talk()
-              {
-                Title =  "How to do Bootstrap 4",
-                Abstract = "How to do Bootstrap 4",
-                Category = "Web Development",
-                Level = "100",
-                Prerequisites = "CSS Experience",
-                Room = "246",
-                StartingTime = DateTime.Parse("13:00")
-              },
-            }
-          },
-          new Speaker()
-          {
-            Name = "Resa Wildermuth",
-            Bio = "I'm a speaker",
-            CompanyName = "Wilder Minds LLC",
-            GitHubName = "resawildermuth",
-            TwitterName = "resawildermuth",
-            PhoneNumber = "555-1212",
-            HeadShotUrl = "http://wilderminds.com/images/minds/resawildermuth.jpg",
-            WebsiteUrl = "http://wildermuth.com",
-            Talks = new List<Talk>()
-            {
-              new Talk()
-              {
-                Title =  "Managing a Consulting Business",
-                Abstract = "Managing a Consulting Business",
-                Category = "Soft Skills",
-                Level = "100",
-                Room = "230",
-                StartingTime = DateTime.Parse("10:30")
-              }
-            }
-          }
+            _ctx = ctx;
         }
-      }
-    };
 
-  }
+        public async Task Seed()
+        {
+
+            if (!_ctx.Brands.Any())
+            {
+                // Add Data
+                _ctx.AddRange(_sample);
+                await _ctx.SaveChangesAsync();
+            }
+        }
+
+        List<Brand> _sample = new List<Brand>()
+        {
+            new Brand()
+            {
+                Name = "Adidas",
+                Products = new List<Product>()
+                {
+                    new Product()
+                    {
+                        Code = "A1",
+                        Colour = "red",
+                        Date = DateTime.Now,
+                        ProductName = "Adidas superstar",
+                        Description = "some description"
+                    },
+                    new Product()
+                    {
+                        Code = "A2",
+                        Colour = "blue",
+                        Date = DateTime.Now,
+                        ProductName = "Adidas superstar",
+                        Description = "some description"
+                    }
+                }
+            },
+            new Brand()
+            {
+                Name = "Nike",
+                Products = new List<Product>()
+                {
+                    new Product()
+                    {
+                        Code = "A1",
+                        Colour = "green",
+                        Date = DateTime.Now,
+                        ProductName = "Nike air max",
+                        Description = "some description"
+                    },
+                    new Product()
+                    {
+                        Code = "A1",
+                        Colour = "blue",
+                        Date = DateTime.Now,
+                        ProductName = "Nike air max",
+                        Description = "some description"
+                    }
+                }
+            },
+        };
+    }
 }

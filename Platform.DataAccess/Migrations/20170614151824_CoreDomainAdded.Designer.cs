@@ -8,9 +8,10 @@ using Platform.DataAccess;
 namespace Platform.DataAccess.Migrations
 {
     [DbContext(typeof(PlatformContext))]
-    partial class PlatformContextModelSnapshot : ModelSnapshot
+    [Migration("20170614151824_CoreDomainAdded")]
+    partial class CoreDomainAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -182,7 +183,7 @@ namespace Platform.DataAccess.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name")
+                    b.Property<string>("BrandName")
                         .IsRequired();
 
                     b.Property<byte[]>("RowVersion")
