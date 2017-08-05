@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Platform.DataAccess.Entities
 {
@@ -13,8 +12,5 @@ namespace Platform.DataAccess.Entities
         public string Zipcode { get; set; }
         public string Country {get;set;}
         public string CreditCardIdentifier { get;set;}
-
-        public ICollection<SellOffer> SellOffers { get; set; }
-        public ICollection<BuyOffer> BuyOffers { get; set; }
     }
 }

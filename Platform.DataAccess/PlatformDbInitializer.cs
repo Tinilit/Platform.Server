@@ -30,49 +30,11 @@ namespace Platform.DataAccess
         {
             new Brand()
             {
-                Name = "Adidas",
-                Products = new List<Product>()
-                {
-                    new Product()
-                    {
-                        Code = "A1",
-                        Colour = "red",
-                        Date = DateTime.Now,
-                        ProductName = "Adidas superstar",
-                        Description = "some description"
-                    },
-                    new Product()
-                    {
-                        Code = "A2",
-                        Colour = "blue",
-                        Date = DateTime.Now,
-                        ProductName = "Adidas superstar",
-                        Description = "some description"
-                    }
-                }
+                Name = "Adidas"
             },
             new Brand()
             {
-                Name = "Nike",
-                Products = new List<Product>()
-                {
-                    new Product()
-                    {
-                        Code = "A1",
-                        Colour = "green",
-                        Date = DateTime.Now,
-                        ProductName = "Nike air max",
-                        Description = "some description"
-                    },
-                    new Product()
-                    {
-                        Code = "A1",
-                        Colour = "blue",
-                        Date = DateTime.Now,
-                        ProductName = "Nike air max",
-                        Description = "some description"
-                    }
-                }
+                Name = "Nike"
             },
         };
     }

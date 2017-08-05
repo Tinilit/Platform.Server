@@ -36,16 +36,8 @@ namespace Plarform.Server
         {
             services.AddSingleton(_config);
             services.AddDbContext<PlatformContext>(ServiceLifetime.Scoped);
-            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IBuyOfferRepository, BuyOfferRepository>();
-            services.AddScoped<IMessageLogRepository, MessageLogRepository>();
-            services.AddScoped<ISellOfferRepository, SellOfferRepository>();
-            services.AddScoped<ITransactionEventRepository, TransactionEventRepository>();
-            services.AddScoped<ITransactionRepository, TransactionRepository>();
-            services.AddScoped<IUserCommunicationRepository, UserCommunicationRepository>();
-            services.AddScoped<IWantListRepository, WantListRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<PlatformDbInitializer>();
             services.AddTransient<PlatformIdentityInitializer>();
