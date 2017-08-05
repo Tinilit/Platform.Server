@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Plarform.Server", "Plarform.Server\Plarform.Server.xproj", "{B6C304A4-2129-40A3-AC52-BA8C9ACE57D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plarform.Server", "Plarform.Server\Plarform.Server.csproj", "{B6C304A4-2129-40A3-AC52-BA8C9ACE57D3}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Platform.DataAccess", "Platform.DataAccess\Platform.DataAccess.xproj", "{27499CF7-2060-4F57-9166-9A2468674626}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.DataAccess", "Platform.DataAccess\Platform.DataAccess.csproj", "{27499CF7-2060-4F57-9166-9A2468674626}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
