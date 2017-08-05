@@ -20,7 +20,7 @@ namespace Platform.DataAccess
 
         public async Task Seed()
         {
-            var user = await _userMgr.FindByNameAsync("tinilit");
+            var user = await _userMgr.FindByNameAsync("Admin");
 
             // Add User
             if (user == null)

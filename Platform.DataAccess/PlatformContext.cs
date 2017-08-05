@@ -5,7 +5,7 @@ using Platform.DataAccess.Entities;
 
 namespace Platform.DataAccess
 {
-    public class PlatformContext : IdentityDbContext
+    public class PlatformContext : IdentityDbContext<User>
     {
         private IConfigurationRoot _config;
 
