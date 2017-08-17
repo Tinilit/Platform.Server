@@ -8,9 +8,10 @@ using Platform.DataAccess;
 namespace Platform.DataAccess.Migrations
 {
     [DbContext(typeof(PlatformContext))]
-    partial class PlatformContextModelSnapshot : ModelSnapshot
+    [Migration("20170807170251_addTest")]
+    partial class addTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -173,20 +174,6 @@ namespace Platform.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tests");
-                });
-
-            modelBuilder.Entity("Platform.DataAccess.Entities.TestType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<byte[]>("RowVersion");
-
-                    b.Property<string>("TypeTest");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TestTypes");
                 });
 
             modelBuilder.Entity("Platform.DataAccess.Entities.User", b =>

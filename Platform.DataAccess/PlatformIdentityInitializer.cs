@@ -29,16 +29,18 @@ namespace Platform.DataAccess
                 {
                     var role1 = new IdentityRole("Admin");
                     var role2 = new IdentityRole("User");
+                    var role3 = new IdentityRole("Provider");
                     role1.Claims.Add(new IdentityRoleClaim<string>() { ClaimType = "IsAdmin", ClaimValue = "True" });
                     await _roleMgr.CreateAsync(role1);
                     await _roleMgr.CreateAsync(role2);
+                    await _roleMgr.CreateAsync(role3);
                 }
 
                 user = new User()
                 {
                     UserName = "Admin",
                     FirstName = "Admin",
-                    Surname = "Adminovich",
+                    LastName = "Adminovich",
                     Email = "Admin@gmail.com"
                 };
 

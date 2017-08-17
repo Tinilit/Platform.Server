@@ -16,6 +16,9 @@ namespace Platform.DataAccess
         }
 
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<Profile> Profile { get; set; }
+        public DbSet<Test> Tests { get; set; }
+        public DbSet<TestType> TestTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

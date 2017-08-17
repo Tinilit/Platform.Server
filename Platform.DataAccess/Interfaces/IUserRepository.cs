@@ -1,4 +1,5 @@
 ﻿using Platform.DataAccess.Entities;
+using System.Collections.Generic;
 
 namespace Platform.DataAccess.Interfaces
 {
@@ -6,5 +7,8 @@ namespace Platform.DataAccess.Interfaces
     {
         // PlatformUser
         User GetUser(string userName);
+        IEnumerable<User> GetAllUsers();
+        User GetUserById(string userId);
+        void Delete(User user);
     }
 }

@@ -8,9 +8,10 @@ using Platform.DataAccess;
 namespace Platform.DataAccess.Migrations
 {
     [DbContext(typeof(PlatformContext))]
-    partial class PlatformContextModelSnapshot : ModelSnapshot
+    [Migration("20170813130222_addTestType")]
+    partial class addTestType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

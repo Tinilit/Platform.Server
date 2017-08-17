@@ -1,16 +1,26 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System;
 
 namespace Platform.DataAccess.Entities
 {
     public class User : IdentityUser
     {
         public string FirstName { get; set; }
-        public string Surname { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
-        public string Town { get; set; }
-        public string Zipcode { get; set; }
-        public string Country {get;set;}
-        public string CreditCardIdentifier { get;set;}
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string Education{ get; set; }
+        public string MaritalStatus{ get; set; }
+        public bool Gender{ get; set; }
+        public string FirstLanguage { get; set; }
+        public string MedName{ get; set; }
+        public int InjuryCount{ get; set; }
+        public int Income{ get; set; }
+        public int Hand{ get; set; }
+        public int Ethnisity{ get; set; }
+        public string BrainActivity{ get; set; }
+        public string Exercise{ get; set; }
+        public string SelfEsteem{ get; set; }
+        public string SelfHealth{ get; set; }
     }
 }

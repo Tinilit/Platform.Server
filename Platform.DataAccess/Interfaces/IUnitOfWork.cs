@@ -6,6 +6,8 @@ namespace Platform.DataAccess.Interfaces
     {
         IBrandRepository BrandRepository { get; }
         IUserRepository UserRepository { get; }
+        ITestRepository TestRepository { get; }
+        ITestTypeRepository TestTypeRepository { get; }
         Task<bool> SaveAllAsync();
     }
 }

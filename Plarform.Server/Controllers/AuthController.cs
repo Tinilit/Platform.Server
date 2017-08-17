@@ -51,7 +51,7 @@ namespace Plarform.Server.Controllers
                             new Claim(JwtRegisteredClaimNames.Sub,user.UserName),
                             new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
                             new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName??"undefined"),
-                            new Claim(JwtRegisteredClaimNames.FamilyName, user.Surname??"undefined"),
+                            //new Claim(JwtRegisteredClaimNames.FamilyName, user.Surname??"undefined"),
                             new Claim(JwtRegisteredClaimNames.Email, user.Email??"undefined")
                         }.Union(userClaims);
 

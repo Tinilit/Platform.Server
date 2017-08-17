@@ -38,6 +38,8 @@ namespace Plarform.Server
             services.AddDbContext<PlatformContext>(ServiceLifetime.Scoped);
             services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITestRepository, TestRepository>();
+            services.AddScoped<ITestTypeRepository, TestTypeRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<PlatformDbInitializer>();
             services.AddTransient<PlatformIdentityInitializer>();

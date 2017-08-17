@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Platform.DataAccess.Entities;
 using Platform.DataAccess.Interfaces;
+using System.Collections.Generic;
 
 namespace Platform.DataAccess.Repositories
 {
@@ -12,6 +13,15 @@ namespace Platform.DataAccess.Repositories
         public UserRepository(PlatformContext context)
         {
             _context = context;
+        }
+
+        public User GetUserById(string userId)
+        {
+            return _context.Users.FirstOrDefault(arg => arg.Id == userId);
+        }
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _context.Users.ToList();
         }
 
         public void Add(User entity)

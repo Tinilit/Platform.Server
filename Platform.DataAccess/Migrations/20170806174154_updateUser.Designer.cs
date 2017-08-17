@@ -8,9 +8,10 @@ using Platform.DataAccess;
 namespace Platform.DataAccess.Migrations
 {
     [DbContext(typeof(PlatformContext))]
-    partial class PlatformContextModelSnapshot : ModelSnapshot
+    [Migration("20170806174154_updateUser")]
+    partial class updateUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -153,42 +154,6 @@ namespace Platform.DataAccess.Migrations
                     b.ToTable("Profile");
                 });
 
-            modelBuilder.Entity("Platform.DataAccess.Entities.Test", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("FinishTime");
-
-                    b.Property<int>("ProviderId");
-
-                    b.Property<byte[]>("RowVersion");
-
-                    b.Property<DateTime>("StartTime");
-
-                    b.Property<int>("TestType");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tests");
-                });
-
-            modelBuilder.Entity("Platform.DataAccess.Entities.TestType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<byte[]>("RowVersion");
-
-                    b.Property<string>("TypeTest");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TestTypes");
-                });
-
             modelBuilder.Entity("Platform.DataAccess.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -196,47 +161,17 @@ namespace Platform.DataAccess.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("Address");
-
-                    b.Property<DateTime>("BirthDate");
-
-                    b.Property<string>("BrainActivity");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<string>("Education");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int>("Ethnisity");
-
-                    b.Property<string>("Exercise");
-
-                    b.Property<string>("FirstLanguage");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<bool>("Gender");
-
-                    b.Property<int>("Hand");
-
-                    b.Property<int>("Income");
-
-                    b.Property<int>("InjuryCount");
-
-                    b.Property<string>("LastName");
-
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("MaritalStatus");
-
-                    b.Property<string>("MedName");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -252,14 +187,44 @@ namespace Platform.DataAccess.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<string>("SelfEsteem");
-
-                    b.Property<string>("SelfHealth");
-
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
+
+                    b.Property<string>("address");
+
+                    b.Property<DateTime>("birthDate");
+
+                    b.Property<string>("brainActivity");
+
+                    b.Property<string>("education");
+
+                    b.Property<int>("ethnisity");
+
+                    b.Property<string>("exercise");
+
+                    b.Property<string>("firstLanguage");
+
+                    b.Property<string>("firstName");
+
+                    b.Property<bool>("gender");
+
+                    b.Property<int>("hand");
+
+                    b.Property<int>("income");
+
+                    b.Property<int>("injuryCount");
+
+                    b.Property<string>("lastName");
+
+                    b.Property<string>("maritalStatus");
+
+                    b.Property<string>("medName");
+
+                    b.Property<string>("selfEsteem");
+
+                    b.Property<string>("selfHealth");
 
                     b.HasKey("Id");
 

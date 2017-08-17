@@ -4,7 +4,7 @@ using Platform.DataAccess.Entities;
 
 namespace Plarform.Server.Mappings
 {
-    public class MappingProfile : Profile
+    public class MappingProfile : AutoMapper.Profile
     {
         public MappingProfile()
         {
@@ -13,6 +13,18 @@ namespace Plarform.Server.Mappings
                 .ForMember(s => s.BrandName, opt => opt.MapFrom(x => x.Name))
                 .ReverseMap()
                 .ForMember(s => s.Name, opt => opt.MapFrom(x => x.BrandName));
+
+            CreateMap<User, ProfileModel>()
+                .ForMember(s => s.Url, opt => opt.ResolveUsing<ProfileUrlResolver>())
+                .ReverseMap();
+
+            CreateMap<Test, TestModel>()
+                .ForMember(s => s.Url, opt => opt.ResolveUsing<TestUrlResolver>())
+                .ReverseMap();
+
+            CreateMap<TestType, TestTypeModel>()
+                .ForMember(s => s.Url, opt => opt.ResolveUsing<TestTypeUrlResolver>())
+                .ReverseMap();
         }
     }
 }
