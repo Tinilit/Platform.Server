@@ -38,6 +38,7 @@ namespace Platform.DataAccess.Repositories
         public void Put(TestType test)
         {
             _context.TestTypes.Update(test);
+
         }
     }
 }
