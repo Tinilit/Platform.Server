@@ -12,9 +12,9 @@ using Platform.DataAccess.Interfaces;
 
 namespace Plarform.Server.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/tests")]
-    //[ValidateModel]
+    [ValidateModel]
     public class TestController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -41,8 +41,8 @@ namespace Plarform.Server.Controllers
                 _unitOfWork.TestRepository.Add(test);
                 if (await _unitOfWork.SaveAllAsync())
                 {
-                    var uri = Url.Link("TestGet", new { testName = test.Id });
-                    return Created(uri, _mapper.Map<BrandModel>(test));
+                    var uri = Url.Link("TestGet", new { testName = test.TestId });
+                    return Created(uri, _mapper.Map<TestModel>(test));
                 }
                 _logger.LogWarning("Could not save test to database");
             }
@@ -63,7 +63,7 @@ namespace Plarform.Server.Controllers
         }
 
         [HttpGet("{testId}", Name = "testGet")]
-        public IActionResult GetById(int testId)
+        public IActionResult Get(int testId)
         {
             try
             {

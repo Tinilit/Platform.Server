@@ -24,10 +24,38 @@ namespace Platform.DataAccess
         {
             base.OnModelCreating(builder);
 
+            //Brand
+            builder.Entity<Brand>()
+                .HasKey(x => x.BrandId);
             builder.Entity<Brand>()
                 .Property(x => x.Name)
                 .IsRequired();
             builder.Entity<Brand>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
+            
+
+            //Profile
+            builder.Entity<Profile>()
+                .HasKey(x => x.ProfileId);
+            builder.Entity<Profile>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
+
+            //Test
+            builder.Entity<Test>()
+                .HasKey(x => x.TestId);
+            builder.Entity<Test>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
+
+            //TestType
+            builder.Entity<TestType>()
+                .HasKey(x => x.TestTypeId);
+            builder.Entity<TestType>()
                 .Property(x => x.RowVersion)
                 .ValueGeneratedOnAddOrUpdate()
                 .IsConcurrencyToken();

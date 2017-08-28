@@ -12,9 +12,9 @@ using Platform.DataAccess.Interfaces;
 
 namespace Plarform.Server.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/testTypes")]
-    //[ValidateModel]
+    [ValidateModel]
     public class TestTypeController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -35,7 +35,7 @@ namespace Plarform.Server.Controllers
         }
 
         [HttpGet("{testTypeId}", Name = "testTypeGet")]
-        public IActionResult GetById(int testTypeId)
+        public IActionResult Get(int testTypeId)
         {
             try
             {

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace Platform.DataAccess.Entities
+﻿namespace Platform.DataAccess.Entities
 {
     public class Brand:Entity
     {
-        public int Id { get; set; }
+        public int BrandId { get; set; }
         public string Name { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Platform.DataAccess.Entities;
 using Platform.DataAccess.Interfaces;
 using System.Linq;
@@ -31,12 +30,12 @@ namespace Platform.DataAccess.Repositories
 
         public Profile GetProfileById(int id)
         {
-            return _context.Profile.FirstOrDefault(arg => arg.Id == id);
+            return _context.Profile.FirstOrDefault(arg => arg.ProfileId == id);
         }
 
-        public Profile GetProfileByName(string profileName)
+        public Profile GetProfileByUserName(string userName)
         {
-            return _context.Profile.FirstOrDefault(arg => arg.Name == profileName);
+            return _context.Profile.FirstOrDefault(arg => arg.User.UserName == userName);
         }
     }
 }

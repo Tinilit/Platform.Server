@@ -33,13 +33,13 @@ namespace Platform.DataAccess.Repositories
 
         public Brand GetBrand(int id)
         {
-            return _context.Brands.FirstOrDefault(c => c.Id == id);
+            return _context.Brands.FirstOrDefault(c => c.BrandId == id);
         }
 
         public Brand GetBrandWithProducts(int id)
         {
             return _context.Brands
-              .FirstOrDefault(c => c.Id == id);
+              .FirstOrDefault(c => c.BrandId == id);
         }
 
         public Brand GetBrandByBrandName(string brandName)
@@ -51,7 +51,6 @@ namespace Platform.DataAccess.Repositories
         public Brand GetBrandByBrandNameWithProducts(string brandName)
         {
             return _context.Brands
-                    //.Include(c => c.Products).ThenInclude(s => s.BuyOffers)
               .FirstOrDefault(c => c.Name.Equals(brandName, StringComparison.CurrentCultureIgnoreCase));
         }
     }

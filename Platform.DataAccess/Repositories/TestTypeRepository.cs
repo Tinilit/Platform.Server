@@ -32,7 +32,7 @@ namespace Platform.DataAccess.Repositories
 
         public TestType GetById(int id)
         {
-            return _context.TestTypes.FirstOrDefault(a => a.Id == id);
+            return _context.TestTypes.FirstOrDefault(a => a.TestTypeId == id);
         }
 
         public void Put(TestType test)

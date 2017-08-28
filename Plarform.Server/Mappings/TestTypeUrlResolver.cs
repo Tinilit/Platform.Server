@@ -19,7 +19,7 @@ namespace Plarform.Server.Mappings
         public string Resolve(TestType source, TestTypeModel destination, string destMember, ResolutionContext context)
         {
             var url = (IUrlHelper)_httpContextAccessor.HttpContext.Items[BaseController.URLHELPER];
-            return url.Link("testTypeGet", new { testTypeId = source.Id });
+            return url.Link("testTypeGet", new { testTypeId = source.TestTypeId });
         }
     }
 }

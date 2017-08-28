@@ -8,6 +8,6 @@ namespace Platform.DataAccess.Interfaces
     {
         IEnumerable<Profile> GetAllProfile();
         Profile GetProfileById(int id);
-        Profile GetProfileByName(string profileName);
+        Profile GetProfileByUserName(string userName);
     }
 }

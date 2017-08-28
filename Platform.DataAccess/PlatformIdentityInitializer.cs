@@ -39,8 +39,6 @@ namespace Platform.DataAccess
                 user = new User()
                 {
                     UserName = "Admin",
-                    FirstName = "Admin",
-                    LastName = "Adminovich",
                     Email = "Admin@gmail.com"
                 };
 

@@ -13,9 +13,9 @@ using System.Linq;
 
 namespace Plarform.Server.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/profiles")]
-    //[ValidateModel]
+    [ValidateModel]
     public class ProfileController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -35,7 +35,7 @@ namespace Plarform.Server.Controllers
             return Ok(_mapper.Map<IEnumerable<ProfileModel>>(_unitOfWork.UserRepository.GetAllUsers()));
         }
 
-        [HttpGet("{userName}", Name = "userGet")]
+        [HttpGet("{userName}", Name = "profileGet")]
         public IActionResult Get(string userName)
         {
             try
@@ -52,13 +52,13 @@ namespace Plarform.Server.Controllers
             }
         }
 
-        [HttpPut("{profileName}")]
-        public async Task<IActionResult> Put(string profileName, [FromBody] ProfileModel model)
+        [HttpPut("{userName}")]
+        public async Task<IActionResult> Put(string userName, [FromBody] ProfileModel model)
         {
             try
             {
-                User user = _unitOfWork.UserRepository.GetUser(profileName);
-                if (user == null) return NotFound($"could not find user {profileName}");
+                User user = _unitOfWork.UserRepository.GetUser(userName);
+                if (user == null) return NotFound($"could not find user {userName}");
                 _mapper.Map(model, user);
                  
                 if (await _unitOfWork.SaveAllAsync())

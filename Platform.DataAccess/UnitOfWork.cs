@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Platform.DataAccess.Interfaces;
-using Platform.DataAccess.Repositories;
 
 namespace Platform.DataAccess
 {

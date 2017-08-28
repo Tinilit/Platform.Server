@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Plarform.Server.Models;
+﻿using Plarform.Server.Models;
 using Platform.DataAccess.Entities;
 
 namespace Plarform.Server.Mappings
@@ -14,7 +13,7 @@ namespace Plarform.Server.Mappings
                 .ReverseMap()
                 .ForMember(s => s.Name, opt => opt.MapFrom(x => x.BrandName));
 
-            CreateMap<User, ProfileModel>()
+            CreateMap<Profile, ProfileModel>()
                 .ForMember(s => s.Url, opt => opt.ResolveUsing<ProfileUrlResolver>())
                 .ReverseMap();
 
