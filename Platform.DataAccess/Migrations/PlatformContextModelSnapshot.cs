@@ -146,13 +146,13 @@ namespace Platform.DataAccess.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<DateTime>("BirthDate");
+                    b.Property<DateTime?>("BirthDate");
 
                     b.Property<string>("BrainActivity");
 
                     b.Property<string>("Education");
 
-                    b.Property<int>("Ethnisity");
+                    b.Property<int?>("Ethnisity");
 
                     b.Property<string>("Exercise");
 
@@ -160,13 +160,13 @@ namespace Platform.DataAccess.Migrations
 
                     b.Property<string>("FirstName");
 
-                    b.Property<bool>("Gender");
+                    b.Property<bool?>("Gender");
 
-                    b.Property<int>("Hand");
+                    b.Property<int?>("Hand");
 
-                    b.Property<int>("Income");
+                    b.Property<int?>("Income");
 
-                    b.Property<int>("InjuryCount");
+                    b.Property<int?>("InjuryCount");
 
                     b.Property<string>("LastName");
 
@@ -189,7 +189,7 @@ namespace Platform.DataAccess.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Profile");
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("Platform.DataAccess.Entities.Test", b =>

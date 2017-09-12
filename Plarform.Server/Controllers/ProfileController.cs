@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Plarform.Server.Filters;
 using Plarform.Server.Models;
-using Platform.DataAccess.Entities;
 using Platform.DataAccess.Interfaces;
-using System.Linq;
 
 namespace Plarform.Server.Controllers
 {
@@ -32,7 +30,7 @@ namespace Plarform.Server.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_mapper.Map<IEnumerable<ProfileModel>>(_unitOfWork.UserRepository.GetAllUsers()));
+            return Ok(_mapper.Map<IEnumerable<ProfileModel>>(_unitOfWork.ProfileRepository.GetAllProfiles()));
         }
 
         [HttpGet("{userName}", Name = "profileGet")]
@@ -40,10 +38,9 @@ namespace Plarform.Server.Controllers
         {
             try
             {
-                User user = null;
-                user = _unitOfWork.UserRepository.GetUser(userName);
-                if (user == null) return NotFound($"user {userName} was not found");
-                return Ok(_mapper.Map<ProfileModel>(user));
+                var profile = _unitOfWork.ProfileRepository.GetProfileByUserName(userName);
+                if (profile == null) return NotFound($"user {userName} was not found");
+                return Ok(_mapper.Map<ProfileModel>(profile));
             }
             catch (Exception ex)
             {
@@ -57,13 +54,13 @@ namespace Plarform.Server.Controllers
         {
             try
             {
-                User user = _unitOfWork.UserRepository.GetUser(userName);
-                if (user == null) return NotFound($"could not find user {userName}");
-                _mapper.Map(model, user);
+                var profile = _unitOfWork.ProfileRepository.GetProfileByUserName(userName);
+                if (profile == null) return NotFound($"could not find user {userName}");
+                _mapper.Map(model, profile);
                  
                 if (await _unitOfWork.SaveAllAsync())
                 {
-                    return Ok(_mapper.Map<ProfileModel>(user));
+                    return Ok(_mapper.Map<ProfileModel>(profile));
                 }
             }
             catch (Exception ex)

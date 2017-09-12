@@ -50,8 +50,6 @@ namespace Plarform.Server.Controllers
                         {
                             new Claim(JwtRegisteredClaimNames.Sub,user.UserName),
                             new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                            new Claim(JwtRegisteredClaimNames.GivenName, user.Profile.FirstName??"undefined"),
-                            //new Claim(JwtRegisteredClaimNames.FamilyName, user.Surname??"undefined"),
                             new Claim(JwtRegisteredClaimNames.Email, user.Email??"undefined")
                         }.Union(userClaims);
 
@@ -76,7 +74,7 @@ namespace Plarform.Server.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Threw exception while creating JWT: {ex}");
-                throw;
+                throw ex;
             }
             return BadRequest("Failed to generate token");
         }

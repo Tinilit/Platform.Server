@@ -8,8 +8,8 @@ using Platform.DataAccess;
 namespace Platform.DataAccess.Migrations
 {
     [DbContext(typeof(PlatformContext))]
-    [Migration("20170813130222_addTestType")]
-    partial class addTestType
+    [Migration("20170828221703_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -125,7 +125,7 @@ namespace Platform.DataAccess.Migrations
 
             modelBuilder.Entity("Platform.DataAccess.Entities.Brand", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BrandId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name")
@@ -135,57 +135,100 @@ namespace Platform.DataAccess.Migrations
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.HasKey("Id");
+                    b.HasKey("BrandId");
 
                     b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("Platform.DataAccess.Entities.Profile", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProfileId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Address");
 
-                    b.Property<byte[]>("RowVersion");
+                    b.Property<DateTime?>("BirthDate");
 
-                    b.HasKey("Id");
+                    b.Property<string>("BrainActivity");
 
-                    b.ToTable("Profile");
+                    b.Property<string>("Education");
+
+                    b.Property<int?>("Ethnisity");
+
+                    b.Property<string>("Exercise");
+
+                    b.Property<string>("FirstLanguage");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<bool?>("Gender");
+
+                    b.Property<int?>("Hand");
+
+                    b.Property<int?>("Income");
+
+                    b.Property<int?>("InjuryCount");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("MaritalStatus");
+
+                    b.Property<string>("MedName");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("SelfEsteem");
+
+                    b.Property<string>("SelfHealth");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("ProfileId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("Platform.DataAccess.Entities.Test", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TestId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("FinishTime");
 
-                    b.Property<int>("ProviderId");
-
-                    b.Property<byte[]>("RowVersion");
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<DateTime>("StartTime");
 
-                    b.Property<int>("TestType");
+                    b.Property<int>("TestTypeId");
 
                     b.Property<string>("UserId");
 
-                    b.HasKey("Id");
+                    b.HasKey("TestId");
+
+                    b.HasIndex("TestTypeId");
 
                     b.ToTable("Tests");
                 });
 
             modelBuilder.Entity("Platform.DataAccess.Entities.TestType", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TestTypeId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<byte[]>("RowVersion");
+                    b.Property<string>("Name");
 
-                    b.Property<string>("TypeTest");
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
-                    b.HasKey("Id");
+                    b.HasKey("TestTypeId");
 
                     b.ToTable("TestTypes");
                 });
@@ -197,47 +240,17 @@ namespace Platform.DataAccess.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("Address");
-
-                    b.Property<DateTime>("BirthDate");
-
-                    b.Property<string>("BrainActivity");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<string>("Education");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int>("Ethnisity");
-
-                    b.Property<string>("Exercise");
-
-                    b.Property<string>("FirstLanguage");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<bool>("Gender");
-
-                    b.Property<int>("Hand");
-
-                    b.Property<int>("Income");
-
-                    b.Property<int>("InjuryCount");
-
-                    b.Property<string>("LastName");
-
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("MaritalStatus");
-
-                    b.Property<string>("MedName");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -252,10 +265,6 @@ namespace Platform.DataAccess.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
-
-                    b.Property<string>("SelfEsteem");
-
-                    b.Property<string>("SelfHealth");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -308,6 +317,21 @@ namespace Platform.DataAccess.Migrations
                     b.HasOne("Platform.DataAccess.Entities.User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Platform.DataAccess.Entities.Profile", b =>
+                {
+                    b.HasOne("Platform.DataAccess.Entities.User", "User")
+                        .WithOne("Profile")
+                        .HasForeignKey("Platform.DataAccess.Entities.Profile", "UserId");
+                });
+
+            modelBuilder.Entity("Platform.DataAccess.Entities.Test", b =>
+                {
+                    b.HasOne("Platform.DataAccess.Entities.TestType", "TestType")
+                        .WithMany("Tests")
+                        .HasForeignKey("TestTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

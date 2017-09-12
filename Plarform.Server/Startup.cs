@@ -13,6 +13,7 @@ using Platform.DataAccess;
 using Platform.DataAccess.Entities;
 using Platform.DataAccess.Interfaces;
 using Platform.DataAccess.Repositories;
+using Newtonsoft.Json.Serialization;
 
 namespace Plarform.Server
 {
@@ -40,6 +41,7 @@ namespace Plarform.Server
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITestRepository, TestRepository>();
             services.AddScoped<ITestTypeRepository, TestTypeRepository>();
+            services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<PlatformDbInitializer>();
             services.AddTransient<PlatformIdentityInitializer>();
@@ -65,6 +67,7 @@ namespace Plarform.Server
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 });
         }
 

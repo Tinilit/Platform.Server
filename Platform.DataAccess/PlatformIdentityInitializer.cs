@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Platform.DataAccess.Entities;
+using Platform.DataAccess.Interfaces;
 
 namespace Platform.DataAccess
 {
@@ -11,11 +12,13 @@ namespace Platform.DataAccess
     {
         private RoleManager<IdentityRole> _roleMgr;
         private UserManager<User> _userMgr;
+        private IUnitOfWork _unitOfwork;
 
-        public PlatformIdentityInitializer(UserManager<User> userMgr, RoleManager<IdentityRole> roleMgr)
+        public PlatformIdentityInitializer(UserManager<User> userMgr, RoleManager<IdentityRole> roleMgr, IUnitOfWork unitOfWork)
         {
             _userMgr = userMgr;
             _roleMgr = roleMgr;
+            _unitOfwork = unitOfWork;
         }
 
         public async Task Seed()
@@ -50,7 +53,6 @@ namespace Platform.DataAccess
                 {
                     throw new InvalidOperationException("Failed to build user and roles");
                 }
-
             }
         }
     }
