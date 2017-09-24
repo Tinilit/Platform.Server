@@ -16,7 +16,8 @@ namespace Plarform.Server.Mappings
             CreateMap<Profile, ProfileModel>()
                 .ForMember(s => s.Url, opt => opt.ResolveUsing<ProfileUrlResolver>())
                 .ReverseMap()
-                .ForMember(s => s.User, opt => opt.Ignore());
+                .ForMember(s => s.User, opt => opt.Ignore())
+                .ForMember(s => s.UserId, opt => opt.Ignore());
 
 
             CreateMap<Test, TestModel>()

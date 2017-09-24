@@ -8,9 +8,10 @@ using Platform.DataAccess;
 namespace Platform.DataAccess.Migrations
 {
     [DbContext(typeof(PlatformContext))]
-    partial class PlatformContextModelSnapshot : ModelSnapshot
+    [Migration("20170917231054_modified_profile")]
+    partial class modified_profile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -160,7 +161,7 @@ namespace Platform.DataAccess.Migrations
 
                     b.Property<string>("FirstName");
 
-                    b.Property<string>("Gender");
+                    b.Property<bool?>("Gender");
 
                     b.Property<string>("Hand");
 
