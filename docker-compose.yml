@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  platform.dataaccess:
+    image: platform.dataaccess
+    build:
+      context: ./Platform.DataAccess
+      dockerfile: Dockerfile

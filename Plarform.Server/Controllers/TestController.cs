@@ -41,7 +41,7 @@ namespace Plarform.Server.Controllers
                 _unitOfWork.TestRepository.Add(test);
                 if (await _unitOfWork.SaveAllAsync())
                 {
-                    var uri = Url.Link("TestGet", new { testName = test.TestId });
+                    var uri = Url.Link("TestGet", new { testId = test.TestId });
                     return Created(uri, _mapper.Map<TestModel>(test));
                 }
                 _logger.LogWarning("Could not save test to database");
@@ -77,6 +77,24 @@ namespace Plarform.Server.Controllers
                 _logger.LogError($"Threw exception while getting test: {ex}");
                 return BadRequest(ex);
             }
+        }
+
+        [HttpDelete("{testId}")]
+        public async Task<IActionResult> Delete(int testId)
+        {
+            try
+            {
+                var test = _unitOfWork.TestRepository.GetById(testId);
+                if (test == null) return NotFound($"test with id {testId} not found");
+                _unitOfWork.TestRepository.Delete(test);
+                if (await _unitOfWork.SaveAllAsync()) return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Threw exception while deleting test: {ex}");
+                return BadRequest(ex);
+            }
+            return BadRequest("Could not delete test");
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Platform.DataAccess.Interfaces
         ITestRepository TestRepository { get; }
         ITestTypeRepository TestTypeRepository { get; }
         IProfileRepository ProfileRepository { get; }
+        IUserTestRepository UserTestRepository { get; }
         Task<bool> SaveAllAsync();
     }
 }

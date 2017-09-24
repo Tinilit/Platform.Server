@@ -19,6 +19,7 @@ namespace Platform.DataAccess
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<TestType> TestTypes { get; set; }
+        public DbSet<UserTest> UserTests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -56,6 +57,20 @@ namespace Platform.DataAccess
             builder.Entity<TestType>()
                 .HasKey(x => x.TestTypeId);
             builder.Entity<TestType>()
+                .Property(x => x.RowVersion)
+                .ValueGeneratedOnAddOrUpdate()
+                .IsConcurrencyToken();
+
+            //UserTest
+            builder.Entity<UserTest>()
+                .HasKey(x => x.UserTestId);
+            builder.Entity<UserTest>()
+                .Property(x=>x.UserId)
+                .IsRequired();
+            builder.Entity<UserTest>()
+                .Property(x => x.TestId)
+                .IsRequired();
+            builder.Entity<UserTest>()
                 .Property(x => x.RowVersion)
                 .ValueGeneratedOnAddOrUpdate()
                 .IsConcurrencyToken();

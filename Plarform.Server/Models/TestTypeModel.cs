@@ -3,6 +3,6 @@
     public class TestTypeModel
     {
         public string Url { get; set; }
-        public string TypeTest { get; set; }
+        public string Name { get; set; }
     }
 }

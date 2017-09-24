@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Platform.DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Platform.DataAccess.Repositories
 {
@@ -27,12 +28,16 @@ namespace Platform.DataAccess.Repositories
 
         public IEnumerable<Test> Get()
         {
-            return _context.Tests.ToList();
+            return _context.Tests
+                .Include(x=>x.TestType)
+                .ToList();
         }
 
         public Test GetById(int id)
         {
-            return _context.Tests.FirstOrDefault(a => a.TestId == id);
+            return _context.Tests
+                .Include(x => x.TestType)
+                .FirstOrDefault(a => a.TestId == id);
         }
 
         public void Put(Test test)

@@ -27,6 +27,11 @@ namespace Plarform.Server.Mappings
             CreateMap<TestType, TestTypeModel>()
                 .ForMember(s => s.Url, opt => opt.ResolveUsing<TestTypeUrlResolver>())
                 .ReverseMap();
+
+            CreateMap<UserTest, UserTestModel>()
+                .ForMember(s => s.Url, opt => opt.ResolveUsing<UserTestUrlResolver>())
+                .ReverseMap()
+                .ForMember(s => s.User, opt => opt.Ignore());
         }
     }
 }

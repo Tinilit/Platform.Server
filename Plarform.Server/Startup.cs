@@ -42,6 +42,7 @@ namespace Plarform.Server
             services.AddScoped<ITestRepository, TestRepository>();
             services.AddScoped<ITestTypeRepository, TestTypeRepository>();
             services.AddScoped<IProfileRepository, ProfileRepository>();
+            services.AddScoped<IUserTestRepository, UserTestRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<PlatformDbInitializer>();
             services.AddTransient<PlatformIdentityInitializer>();
@@ -81,7 +82,7 @@ namespace Plarform.Server
             loggerFactory.AddConsole(_config.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseCors(x =>x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseIdentity();
             app.UseJwtBearerAuthentication(new JwtBearerOptions()
             {

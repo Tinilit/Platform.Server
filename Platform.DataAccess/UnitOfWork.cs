@@ -14,13 +14,15 @@ namespace Platform.DataAccess
             IUserRepository userRepository,
             ITestRepository testRepository,
             ITestTypeRepository testTypeRepository,
-            IProfileRepository profileRepository)
+            IProfileRepository profileRepository,
+            IUserTestRepository userTestRepository)
         {
             BrandRepository = brandRepository;
             UserRepository = userRepository;
             TestRepository = testRepository;
             TestTypeRepository = testTypeRepository;
             ProfileRepository = profileRepository;
+            UserTestRepository = userTestRepository;
             _context = context;
         }
 
@@ -29,6 +31,7 @@ namespace Platform.DataAccess
         public ITestRepository TestRepository { get; }
         public ITestTypeRepository TestTypeRepository { get; }
         public IProfileRepository ProfileRepository { get; }
+        public IUserTestRepository UserTestRepository { get; }
 
         public async Task<bool> SaveAllAsync()
         {

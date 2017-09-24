@@ -7,19 +7,19 @@ using Platform.DataAccess.Entities;
 
 namespace Plarform.Server.Mappings
 {
-    public class TestUrlResolver : IValueResolver<Test, TestModel, string>
+    public class UserTestUrlResolver : IValueResolver<UserTest, UserTestModel, string>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public TestUrlResolver(IHttpContextAccessor httpContextAccessor)
+        public UserTestUrlResolver(IHttpContextAccessor httpContextAccessor)
         {
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public string Resolve(Test source, TestModel destination, string destMember, ResolutionContext context)
+        public string Resolve(UserTest source, UserTestModel destination, string destMember, ResolutionContext context)
         {
             var url = (IUrlHelper)_httpContextAccessor.HttpContext.Items[BaseController.URLHELPER];
-            return url.Link("testGet", new { testId = source.TestId });
+            return url.Link("userTestGet", new { userTestId = source.UserTestId });
         }
     }
 }
