@@ -12,7 +12,7 @@ using Platform.DataAccess.Interfaces;
 
 namespace Plarform.Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/tests")]
     [ValidateModel]
     public class TestController : BaseController
@@ -95,6 +95,27 @@ namespace Plarform.Server.Controllers
                 return BadRequest(ex);
             }
             return BadRequest("Could not delete test");
+        }
+
+        [HttpPut("{testId}")]
+        public async Task<IActionResult> Put(int testId,[FromBody] TestModel model)
+        {
+            try
+            {
+                Test test = _unitOfWork.TestRepository.GetById(testId);
+                if (test == null) return NotFound($"test with id {testId} not found");
+                _mapper.Map(model, test);
+                if (await _unitOfWork.SaveAllAsync())
+                {
+                    return Ok(_mapper.Map<TestModel>(test));
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Threw exception while putting test: {ex}");
+                return BadRequest(ex);
+            }
+            return BadRequest("Could not put test");
         }
     }
 }
