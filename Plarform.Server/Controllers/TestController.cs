@@ -12,16 +12,16 @@ using Platform.DataAccess.Interfaces;
 
 namespace Plarform.Server.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/tests")]
     [ValidateModel]
     public class TestController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
-        private ILogger<BrandsController> _logger;
+        private ILogger<TestController> _logger;
         private IMapper _mapper;
 
-        public TestController(IUnitOfWork unitOfWork, ILogger<BrandsController> logger, IMapper mapper)
+        public TestController(IUnitOfWork unitOfWork, ILogger<TestController> logger, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
