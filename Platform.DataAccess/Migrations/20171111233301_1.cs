@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Platform.DataAccess.Migrations
 {
-    public partial class init : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -112,29 +112,6 @@ namespace Platform.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tests",
-                columns: table => new
-                {
-                    TestId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FinishTime = table.Column<DateTime>(nullable: false),
-                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
-                    StartTime = table.Column<DateTime>(nullable: false),
-                    TestTypeId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tests", x => x.TestId);
-                    table.ForeignKey(
-                        name: "FK_Tests_TestTypes_TestTypeId",
-                        column: x => x.TestTypeId,
-                        principalTable: "TestTypes",
-                        principalColumn: "TestTypeId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -200,7 +177,7 @@ namespace Platform.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Profile",
+                name: "Profiles",
                 columns: table => new
                 {
                     ProfileId = table.Column<int>(nullable: false)
@@ -209,14 +186,14 @@ namespace Platform.DataAccess.Migrations
                     BirthDate = table.Column<DateTime>(nullable: true),
                     BrainActivity = table.Column<string>(nullable: true),
                     Education = table.Column<string>(nullable: true),
-                    Ethnisity = table.Column<int>(nullable: false),
+                    Ethnisity = table.Column<string>(nullable: true),
                     Exercise = table.Column<string>(nullable: true),
                     FirstLanguage = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
-                    Gender = table.Column<bool>(nullable: false),
-                    Hand = table.Column<int>(nullable: false),
-                    Income = table.Column<int>(nullable: false),
-                    InjuryCount = table.Column<int>(nullable: false),
+                    Gender = table.Column<string>(nullable: true),
+                    Hand = table.Column<string>(nullable: true),
+                    Income = table.Column<string>(nullable: true),
+                    InjuryCount = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     MaritalStatus = table.Column<string>(nullable: true),
                     MedName = table.Column<string>(nullable: true),
@@ -227,13 +204,68 @@ namespace Platform.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Profile", x => x.ProfileId);
+                    table.PrimaryKey("PK_Profiles", x => x.ProfileId);
                     table.ForeignKey(
-                        name: "FK_Profile_AspNetUsers_UserId",
+                        name: "FK_Profiles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tests",
+                columns: table => new
+                {
+                    TestId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Data = table.Column<string>(nullable: true),
+                    ProviderId = table.Column<string>(nullable: true),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    TestTypeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tests", x => x.TestId);
+                    table.ForeignKey(
+                        name: "FK_Tests_AspNetUsers_ProviderId",
+                        column: x => x.ProviderId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tests_TestTypes_TestTypeId",
+                        column: x => x.TestTypeId,
+                        principalTable: "TestTypes",
+                        principalColumn: "TestTypeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserTests",
+                columns: table => new
+                {
+                    UserTestId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    TestId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserTests", x => x.UserTestId);
+                    table.ForeignKey(
+                        name: "FK_UserTests_Tests_TestId",
+                        column: x => x.TestId,
+                        principalTable: "Tests",
+                        principalColumn: "TestId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserTests_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -262,10 +294,15 @@ namespace Platform.DataAccess.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Profile_UserId",
-                table: "Profile",
+                name: "IX_Profiles_UserId",
+                table: "Profiles",
                 column: "UserId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tests_ProviderId",
+                table: "Tests",
+                column: "ProviderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tests_TestTypeId",
@@ -282,6 +319,16 @@ namespace Platform.DataAccess.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserTests_TestId",
+                table: "UserTests",
+                column: "TestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserTests_UserId",
+                table: "UserTests",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -305,13 +352,16 @@ namespace Platform.DataAccess.Migrations
                 name: "Brands");
 
             migrationBuilder.DropTable(
-                name: "Profile");
+                name: "Profiles");
 
             migrationBuilder.DropTable(
-                name: "Tests");
+                name: "UserTests");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Tests");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

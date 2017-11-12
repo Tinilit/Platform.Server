@@ -18,7 +18,7 @@ namespace Platform.DataAccess.Repositories
         public UserTest GetUserTestById(int userTestId)
         {
             return _context.UserTests
-                .Include(x=>x.UserProfile)
+                .Include(x=>x.User)
                 .Include(x => x.Test)
                 .ThenInclude(x=>x.TestType)
                 .FirstOrDefault(arg => arg.UserTestId == userTestId);
@@ -27,9 +27,8 @@ namespace Platform.DataAccess.Repositories
         public IEnumerable<UserTest> GetAllUserTests()
         {
             return _context.UserTests
-                .Include(x => x.UserProfile)
-                .Include(x => x.Test)
-                .ThenInclude(x => x.TestType)
+                .Include(x => x.User).ThenInclude(x=>x.Profile)
+                .Include(x => x.Test).ThenInclude(x => x.TestType)
                 .ToList();
         }
 

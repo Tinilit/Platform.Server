@@ -22,7 +22,9 @@ namespace Plarform.Server.Mappings
 
             CreateMap<Test, TestModel>()
                 .ForMember(s => s.Url, opt => opt.ResolveUsing<TestUrlResolver>())
-                .ReverseMap();
+                .ForMember(s => s.ProviderProfile, opt => opt.MapFrom(x => x.Provider.Profile))
+                .ReverseMap()
+                .ForMember(s => s.Provider, opt => opt.Ignore());
 
             CreateMap<TestType, TestTypeModel>()
                 .ForMember(s => s.Url, opt => opt.ResolveUsing<TestTypeUrlResolver>())
@@ -30,7 +32,9 @@ namespace Plarform.Server.Mappings
 
             CreateMap<UserTest, UserTestModel>()
                 .ForMember(s => s.Url, opt => opt.ResolveUsing<UserTestUrlResolver>())
-                .ReverseMap();
+                .ForMember(s => s.UserProfile, opt => opt.MapFrom(x => x.User.Profile))
+                .ReverseMap()
+                .ForMember(s => s.User, opt => opt.Ignore());
         }
     }
 }

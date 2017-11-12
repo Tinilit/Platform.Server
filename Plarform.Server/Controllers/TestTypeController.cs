@@ -18,10 +18,10 @@ namespace Plarform.Server.Controllers
     public class TestTypeController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
-        private ILogger<BrandsController> _logger;
+        private ILogger<TestTypeController> _logger;
         private IMapper _mapper;
 
-        public TestTypeController(IUnitOfWork unitOfWork, ILogger<BrandsController> logger, IMapper mapper)
+        public TestTypeController(IUnitOfWork unitOfWork, ILogger<TestTypeController> logger, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;

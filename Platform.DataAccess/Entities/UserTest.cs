@@ -4,8 +4,8 @@
     {
         public int UserTestId { get; set; }
 
-        public int UserProfileId { get; set; }
-        public Profile UserProfile { get; set; }
+        public string UserId { get; set; }
+        public User User { get; set; }
 
         public int TestId { get; set; }
         public Test Test { get; set; }

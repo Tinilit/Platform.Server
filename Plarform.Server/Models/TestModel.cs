@@ -6,7 +6,7 @@
 
         public string Data { get; set; }
 
-        public int ProviderProfileId { get; set; }
+        public string ProviderId { get; set; }
         public ProfileModel ProviderProfile { get; set; }
 
         public int TestTypeId { get; set; }

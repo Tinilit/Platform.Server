@@ -8,8 +8,8 @@ using Platform.DataAccess;
 namespace Platform.DataAccess.Migrations
 {
     [DbContext(typeof(PlatformContext))]
-    [Migration("20170828221703_init1")]
-    partial class init1
+    [Migration("20171111233301_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -153,7 +153,7 @@ namespace Platform.DataAccess.Migrations
 
                     b.Property<string>("Education");
 
-                    b.Property<int?>("Ethnisity");
+                    b.Property<string>("Ethnisity");
 
                     b.Property<string>("Exercise");
 
@@ -161,13 +161,13 @@ namespace Platform.DataAccess.Migrations
 
                     b.Property<string>("FirstName");
 
-                    b.Property<bool?>("Gender");
+                    b.Property<string>("Gender");
 
-                    b.Property<int?>("Hand");
+                    b.Property<string>("Hand");
 
-                    b.Property<int?>("Income");
+                    b.Property<string>("Income");
 
-                    b.Property<int?>("InjuryCount");
+                    b.Property<string>("InjuryCount");
 
                     b.Property<string>("LastName");
 
@@ -198,19 +198,19 @@ namespace Platform.DataAccess.Migrations
                     b.Property<int>("TestId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("FinishTime");
+                    b.Property<string>("Data");
+
+                    b.Property<string>("ProviderId");
 
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<DateTime>("StartTime");
-
                     b.Property<int>("TestTypeId");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("TestId");
+
+                    b.HasIndex("ProviderId");
 
                     b.HasIndex("TestTypeId");
 
@@ -283,6 +283,29 @@ namespace Platform.DataAccess.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Platform.DataAccess.Entities.UserTest", b =>
+                {
+                    b.Property<int>("UserTestId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<int>("TestId");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("UserTestId");
+
+                    b.HasIndex("TestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTests");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
@@ -329,9 +352,26 @@ namespace Platform.DataAccess.Migrations
 
             modelBuilder.Entity("Platform.DataAccess.Entities.Test", b =>
                 {
+                    b.HasOne("Platform.DataAccess.Entities.User", "Provider")
+                        .WithMany()
+                        .HasForeignKey("ProviderId");
+
                     b.HasOne("Platform.DataAccess.Entities.TestType", "TestType")
                         .WithMany("Tests")
                         .HasForeignKey("TestTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Platform.DataAccess.Entities.UserTest", b =>
+                {
+                    b.HasOne("Platform.DataAccess.Entities.Test", "Test")
+                        .WithMany("UserTests")
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Platform.DataAccess.Entities.User", "User")
+                        .WithMany("UserTests")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

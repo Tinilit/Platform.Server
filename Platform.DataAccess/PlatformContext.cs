@@ -65,7 +65,7 @@ namespace Platform.DataAccess
             builder.Entity<UserTest>()
                 .HasKey(x => x.UserTestId);
             builder.Entity<UserTest>()
-                .Property(x=>x.UserProfileId)
+                .Property(x=>x.UserId)
                 .IsRequired();
             builder.Entity<UserTest>()
                 .Property(x => x.TestId)

@@ -4,7 +4,7 @@
     {
         public string Url { get; set; }
         
-        public int UserProfileId { get; set; }
+        public string UserId { get; set; }
         public ProfileModel UserProfile { get; set; }
 
         public int TestId { get; set; }
