@@ -5,7 +5,7 @@ namespace Platform.DataAccess.Entities
     public class Test : Entity
     {
         public int TestId { get; set; }
-
+        public string Name { get; set; }
         public string Data { get; set; }
 
         public string ProviderId { get; set; }

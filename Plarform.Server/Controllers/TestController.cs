@@ -9,10 +9,12 @@ using Plarform.Server.Filters;
 using Plarform.Server.Models;
 using Platform.DataAccess.Entities;
 using Platform.DataAccess.Interfaces;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Plarform.Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/tests")]
     [ValidateModel]
     public class TestController : BaseController
@@ -54,6 +56,15 @@ namespace Plarform.Server.Controllers
 
             return BadRequest();
         }
+
+        //[HttpPost]
+        //public  IActionResult Post([FromBody] SendTestModel model)
+        //{
+        //    //var res = JsonConvert.DeserializeObject(model.Data);
+        //    standartTestModel res = JsonConvert.DeserializeObject<standartTestModel>(model.Data);
+        //    _logger.LogInformation("Creating a new test");
+        //    return Ok();
+        //}
 
         [HttpGet]
         public IActionResult Get()

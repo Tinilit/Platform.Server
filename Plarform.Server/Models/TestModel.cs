@@ -3,7 +3,7 @@
     public class TestModel
     {
         public string Url { get; set; }
-
+        public string Name { get; set; }
         public string Data { get; set; }
 
         public string ProviderId { get; set; }

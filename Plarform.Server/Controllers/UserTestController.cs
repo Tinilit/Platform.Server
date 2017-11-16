@@ -15,13 +15,13 @@ namespace Plarform.Server.Controllers
     [Authorize]
     [Route("api/usertests")]
     [ValidateModel]
-    public class UsetTestController : BaseController
+    public class UserTestController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
-        private ILogger<UsetTestController> _logger;
+        private ILogger<UserTestController> _logger;
         private IMapper _mapper;
 
-        public UsetTestController(IUnitOfWork unitOfWork, ILogger<UsetTestController> logger, IMapper mapper)
+        public UserTestController(IUnitOfWork unitOfWork, ILogger<UserTestController> logger, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
@@ -31,6 +31,7 @@ namespace Plarform.Server.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+
             return Ok(_mapper.Map<IEnumerable<UserTestModel>>(_unitOfWork.UserTestRepository.GetAllUserTests()));
         }
 

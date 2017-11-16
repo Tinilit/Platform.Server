@@ -29,6 +29,7 @@ namespace Platform.DataAccess.Repositories
         public IEnumerable<Test> Get()
         {
             return _context.Tests
+                .Include(x => x.Provider).ThenInclude(x=>x.Profile)
                 .Include(x=>x.TestType)
                 .ToList();
         }
@@ -36,6 +37,7 @@ namespace Platform.DataAccess.Repositories
         public Test GetById(int id)
         {
             return _context.Tests
+                .Include(x=>x.Provider).ThenInclude(x => x.Profile)
                 .Include(x => x.TestType)
                 .FirstOrDefault(a => a.TestId == id);
         }
