@@ -12,6 +12,8 @@ using Microsoft.IdentityModel.Tokens;
 using Plarform.Server.Filters;
 using Plarform.Server.Models;
 using Platform.DataAccess.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Plarform.Server.Controllers
 {
@@ -46,11 +48,15 @@ namespace Plarform.Server.Controllers
                     if (_hasher.VerifyHashedPassword(user, user.PasswordHash, model.Password) == PasswordVerificationResult.Success)
                     {
                         var userClaims = await _userManager.GetClaimsAsync(user);
+                        var userRoles = await _userManager.GetRolesAsync(user);
+
+                        var roles = userRoles.Aggregate((x, z) => string.IsNullOrEmpty(x) ? z : x + "," + z);
                         var claims = new[]
                         {
                             new Claim(JwtRegisteredClaimNames.Sub,user.UserName),
                             new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                            new Claim(JwtRegisteredClaimNames.Email, user.Email??"undefined")
+                            new Claim(JwtRegisteredClaimNames.Email, user.Email??"undefined"),
+                            new Claim("roles", roles)
                         }.Union(userClaims);
 
                         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
@@ -66,6 +72,7 @@ namespace Plarform.Server.Controllers
                         return Ok(new
                         {
                             token = new JwtSecurityTokenHandler().WriteToken(token),
+                            userId = user.Id,
                             expiration = token.ValidTo
                         });
                     }

@@ -57,15 +57,6 @@ namespace Plarform.Server.Controllers
             return BadRequest();
         }
 
-        //[HttpPost]
-        //public  IActionResult Post([FromBody] SendTestModel model)
-        //{
-        //    //var res = JsonConvert.DeserializeObject(model.Data);
-        //    standartTestModel res = JsonConvert.DeserializeObject<standartTestModel>(model.Data);
-        //    _logger.LogInformation("Creating a new test");
-        //    return Ok();
-        //}
-
         [HttpGet]
         public IActionResult Get()
         {
