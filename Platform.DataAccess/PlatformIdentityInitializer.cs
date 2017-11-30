@@ -24,6 +24,7 @@ namespace Platform.DataAccess
         public async Task Seed()
         {
             var user = await _userMgr.FindByNameAsync("Admin");
+            var user1 = await _userMgr.FindByNameAsync("User");
 
             // Add User
             if (user == null)
@@ -48,11 +49,31 @@ namespace Platform.DataAccess
                 var userResult = await _userMgr.CreateAsync(user, "Admin");
                 var roleResult = await _userMgr.AddToRoleAsync(user, "Admin");
                 var claimResult = await _userMgr.AddClaimAsync(user, new Claim("SuperUser", "True"));
-
+                
                 if (!userResult.Succeeded || !roleResult.Succeeded || !claimResult.Succeeded)
                 {
                     throw new InvalidOperationException("Failed to build user and roles");
                 }
+            }
+
+            if (user1 == null)
+            {
+                if (!(await _roleMgr.RoleExistsAsync("Provider")))
+                {
+                    var role3 = new IdentityRole("Provider");
+                    await _roleMgr.CreateAsync(role3);
+                }
+
+                user1 = new User()
+                {
+                    UserName = "Provider",
+                    Email = "Provider@gmail.com"
+                };
+
+                var userResult1 = await _userMgr.CreateAsync(user1, "Provider");
+                var roleResult1 = await _userMgr.AddToRoleAsync(user1, "User");
+                var roleResult2 = await _userMgr.AddToRoleAsync(user1, "Provider");
+                var claimResult1 = await _userMgr.AddClaimAsync(user1, new Claim("SuperUser", "True"));
             }
         }
     }

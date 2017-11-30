@@ -41,5 +41,14 @@ namespace Platform.DataAccess.Repositories
         {
             _context.Remove(entity);
         }
+
+        public IEnumerable<UserTest> GetUserTestsByProviderId(string providerId)
+        {
+            return _context.UserTests
+                .Where(x => x.Test.ProviderId.Equals(providerId))
+                .Include(x => x.User).ThenInclude(x => x.Profile)
+                .Include(x => x.Test).ThenInclude(x => x.TestType)
+                .ToList();
+        }
     }
 }

@@ -9,12 +9,10 @@ using Plarform.Server.Filters;
 using Plarform.Server.Models;
 using Platform.DataAccess.Entities;
 using Platform.DataAccess.Interfaces;
-using System.IO;
-using Newtonsoft.Json;
 
 namespace Plarform.Server.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/tests")]
     [ValidateModel]
     public class TestController : BaseController

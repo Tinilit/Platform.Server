@@ -21,7 +21,7 @@ namespace Platform.DataAccess.Repositories
         }
         public IEnumerable<User> GetAllUsers()
         {
-            return _context.Users.ToList();
+            return _context.Users.Include(x=>x.Profile).ToList();
         }
 
         public void Add(User entity)

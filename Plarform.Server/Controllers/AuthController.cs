@@ -73,6 +73,7 @@ namespace Plarform.Server.Controllers
                         {
                             token = new JwtSecurityTokenHandler().WriteToken(token),
                             userId = user.Id,
+                            userName = user.UserName,
                             expiration = token.ValidTo
                         });
                     }

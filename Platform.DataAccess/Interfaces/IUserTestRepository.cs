@@ -7,5 +7,6 @@ namespace Platform.DataAccess.Interfaces
     {
         UserTest GetUserTestById(int userTestId);
         IEnumerable<UserTest> GetAllUserTests();
+        IEnumerable<UserTest> GetUserTestsByProviderId(string providerId);
     }
 }

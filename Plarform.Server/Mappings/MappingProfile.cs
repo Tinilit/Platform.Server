@@ -35,6 +35,11 @@ namespace Plarform.Server.Mappings
                 .ForMember(s => s.UserProfile, opt => opt.MapFrom(x => x.User.Profile))
                 .ReverseMap()
                 .ForMember(s => s.User, opt => opt.Ignore());
+
+            CreateMap<User, UserModel>()
+                .ForMember(s=>s.Profile, opt=>opt.MapFrom(x=>x.Profile))
+                .ForMember(s => s.UserId, opt => opt.MapFrom(x => x.Id));
+
         }
     }
 }
